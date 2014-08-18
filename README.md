@@ -46,7 +46,7 @@ ____
 5. The documentation should be at the Shiny website itself. Do not post to an external link.
 
 Done and deployed in shinyapps.io:
-[shiny](https://github.com/mandelbrot/coursera-devdataprod-004/tree/master/shiny)
+[shiny](http://mandelbrot.shinyapps.io/shiny/)
 
 ____
 ## Part2: Reproducible Pitch Presentation  

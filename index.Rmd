@@ -24,11 +24,13 @@ knit        : slidify::knit2slides
 ### Part2: Reproducible Pitch Presentation  
 - URL: *https://github.com/mandelbrot/coursera-devdataprod-004/tree/master/slidify*
 
+---
 ### Get all SourceCode @Github:
 
 ```
 git clone https://github.com/mandelbrot/coursera-devdataprod-004.git
 ```
+---
 
 ## mtcars dataset - Description
 
@@ -67,39 +69,19 @@ head(mtcars, 3)
 ---
 
 ## Analysis - main code
-
-See the boxplot as fig 1 for visual explanation.
 ```{r}
 fit1 <- lm(mpg~am, data=mtcars)
 summary(fit1)
 ```
 
-### Finding the best model
+### Model
 
 Let's fit a model with all explanatory variables. R-squared = 0.869
 ```{r}
 fitAll<-lm(mpg~.,mtcars)
 summary(fitAll)
 ```
-
-P values are high so we can use only those variables with low p values, for example p, wt, qsec and am. Actually, we got 0.8579 R-squared for model lm(mpg~hp+wt+qsec+am,mtcars) which is lower than fitAll model, but with a little experimenting, I got the following model with 0.8942 R-squared:
-```{r}
-fit2<-lm(mpg~hp*wt+qsec+am,mtcars)
-summary(fit2)
-```
-
-### Comparing models
-
-We got 2 models, second one combining variables describes Mpg the best.
-
-See fig 2 and 3 for visual explanation.
-```{r}
-anova(fit1, fit2)
-
-```
-
-P value is lower than 0.05 which means that model fit2 is significant improvement over model fit1
-
+---
 ## Appendix
 
 ### Figure 1
@@ -116,10 +98,5 @@ abline(lm(mpg ~ am, m), col="red")
 layout(matrix(c(1,2,3,4),2,2))
 plot(fit1)
 ```
-
-### Figure 3
-```{r}
-layout(matrix(c(1,2,3,4),2,2))
-plot(fit2)
-```
+---
 

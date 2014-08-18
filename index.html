@@ -66,10 +66,19 @@
 <li>URL: <em><a href="https://github.com/mandelbrot/coursera-devdataprod-004/tree/master/slidify">https://github.com/mandelbrot/coursera-devdataprod-004/tree/master/slidify</a></em></li>
 </ul>
 
-<h3>Get all SourceCode @Github:</h3>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
 
-<pre><code>git clone https://github.com/mandelbrot/coursera-devdataprod-004.git
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h3>Get all SourceCode @Github:</h3>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>git clone https://github.com/mandelbrot/coursera-devdataprod-004.git
 </code></pre>
+
+<hr>
 
 <h2>mtcars dataset - Description</h2>
 
@@ -99,7 +108,7 @@ head(mtcars, 3)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-2" style="background:;">
+<slide class="" id="slide-3" style="background:;">
   <hgroup>
     <h2>mtcars dataset - Format</h2>
   </hgroup>
@@ -174,14 +183,12 @@ head(mtcars, 3)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-3" style="background:;">
+<slide class="" id="slide-4" style="background:;">
   <hgroup>
     <h2>Analysis - main code</h2>
   </hgroup>
   <article data-timings="">
-    <p>See the boxplot as fig 1 for visual explanation.</p>
-
-<pre><code class="r">fit1 &lt;- lm(mpg~am, data=mtcars)
+    <pre><code class="r">fit1 &lt;- lm(mpg~am, data=mtcars)
 summary(fit1)
 </code></pre>
 
@@ -205,7 +212,7 @@ summary(fit1)
 ## F-statistic: 16.9 on 1 and 30 DF,  p-value: 0.000285
 </code></pre>
 
-<h3>Finding the best model</h3>
+<h3>Model</h3>
 
 <p>Let&#39;s fit a model with all explanatory variables. R-squared = 0.869</p>
 
@@ -242,57 +249,7 @@ summary(fitAll)
 ## F-statistic: 13.9 on 10 and 21 DF,  p-value: 3.79e-07
 </code></pre>
 
-<p>P values are high so we can use only those variables with low p values, for example p, wt, qsec and am. Actually, we got 0.8579 R-squared for model lm(mpg~hp+wt+qsec+am,mtcars) which is lower than fitAll model, but with a little experimenting, I got the following model with 0.8942 R-squared:</p>
-
-<pre><code class="r">fit2&lt;-lm(mpg~hp*wt+qsec+am,mtcars)
-summary(fit2)
-</code></pre>
-
-<pre><code>## 
-## Call:
-## lm(formula = mpg ~ hp * wt + qsec + am, data = mtcars)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -3.394 -1.441 -0.271  1.253  4.150 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 35.93948   10.26506    3.50  0.00169 ** 
-## hp          -0.09776    0.02954   -3.31  0.00274 ** 
-## wt          -7.92300    1.75109   -4.52  0.00012 ***
-## qsec         0.59727    0.39232    1.52  0.13998    
-## am           0.91131    1.40071    0.65  0.52101    
-## hp:wt        0.02516    0.00841    2.99  0.00602 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 2.14 on 26 degrees of freedom
-## Multiple R-squared:  0.894,  Adjusted R-squared:  0.874 
-## F-statistic:   44 on 5 and 26 DF,  p-value: 7.18e-12
-</code></pre>
-
-<h3>Comparing models</h3>
-
-<p>We got 2 models, second one combining variables describes Mpg the best.</p>
-
-<p>See fig 2 and 3 for visual explanation.</p>
-
-<pre><code class="r">anova(fit1, fit2)
-</code></pre>
-
-<pre><code>## Analysis of Variance Table
-## 
-## Model 1: mpg ~ am
-## Model 2: mpg ~ hp * wt + qsec + am
-##   Res.Df RSS Df Sum of Sq    F  Pr(&gt;F)    
-## 1     30 721                              
-## 2     26 119  4       602 32.8 8.1e-10 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-</code></pre>
-
-<p>P value is lower than 0.05 which means that model fit2 is significant improvement over model fit1</p>
+<hr>
 
 <h2>Appendix</h2>
 
@@ -305,7 +262,7 @@ plot(m$am , m$mpg, main=&quot;MPG vs Transmission&quot;, xlab=&quot;Transmission
 abline(lm(mpg ~ am, m), col=&quot;red&quot;)
 </code></pre>
 
-<p><img src="assets/fig/unnamed-chunk-6.png" alt="plot of chunk unnamed-chunk-6"> </p>
+<p><img src="assets/fig/unnamed-chunk-4.png" alt="plot of chunk unnamed-chunk-4"> </p>
 
 <h3>Figure 2</h3>
 
@@ -313,15 +270,7 @@ abline(lm(mpg ~ am, m), col=&quot;red&quot;)
 plot(fit1)
 </code></pre>
 
-<p><img src="assets/fig/unnamed-chunk-7.png" alt="plot of chunk unnamed-chunk-7"> </p>
-
-<h3>Figure 3</h3>
-
-<pre><code class="r">layout(matrix(c(1,2,3,4),2,2))
-plot(fit2)
-</code></pre>
-
-<p><img src="assets/fig/unnamed-chunk-8.png" alt="plot of chunk unnamed-chunk-8"> </p>
+<h2><img src="assets/fig/unnamed-chunk-5.png" alt="plot of chunk unnamed-chunk-5"> </h2>
 
   </article>
   <!-- Presenter Notes -->
@@ -339,14 +288,20 @@ plot(fit2)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='mtcars dataset - Format'>
+        data-slide=2 title='Get all SourceCode @Github:'>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Analysis - main code'>
+        data-slide=3 title='mtcars dataset - Format'>
          3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Analysis - main code'>
+         4
       </a>
     </li>
   </ul>

@@ -24,11 +24,13 @@ knit        : slidify::knit2slides
 ### Part2: Reproducible Pitch Presentation  
 - URL: *https://github.com/mandelbrot/coursera-devdataprod-004/tree/master/slidify*
 
+---
 ### Get all SourceCode @Github:
 
 ```
 git clone https://github.com/mandelbrot/coursera-devdataprod-004.git
 ```
+---
 
 ## mtcars dataset - Description
 
@@ -76,8 +78,6 @@ head(mtcars, 3)
 
 ## Analysis - main code
 
-See the boxplot as fig 1 for visual explanation.
-
 ```r
 fit1 <- lm(mpg~am, data=mtcars)
 summary(fit1)
@@ -104,7 +104,7 @@ summary(fit1)
 ## F-statistic: 16.9 on 1 and 30 DF,  p-value: 0.000285
 ```
 
-### Finding the best model
+### Model
 
 Let's fit a model with all explanatory variables. R-squared = 0.869
 
@@ -142,63 +142,7 @@ summary(fitAll)
 ## Multiple R-squared:  0.869,	Adjusted R-squared:  0.807 
 ## F-statistic: 13.9 on 10 and 21 DF,  p-value: 3.79e-07
 ```
-
-P values are high so we can use only those variables with low p values, for example p, wt, qsec and am. Actually, we got 0.8579 R-squared for model lm(mpg~hp+wt+qsec+am,mtcars) which is lower than fitAll model, but with a little experimenting, I got the following model with 0.8942 R-squared:
-
-```r
-fit2<-lm(mpg~hp*wt+qsec+am,mtcars)
-summary(fit2)
-```
-
-```
-## 
-## Call:
-## lm(formula = mpg ~ hp * wt + qsec + am, data = mtcars)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -3.394 -1.441 -0.271  1.253  4.150 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 35.93948   10.26506    3.50  0.00169 ** 
-## hp          -0.09776    0.02954   -3.31  0.00274 ** 
-## wt          -7.92300    1.75109   -4.52  0.00012 ***
-## qsec         0.59727    0.39232    1.52  0.13998    
-## am           0.91131    1.40071    0.65  0.52101    
-## hp:wt        0.02516    0.00841    2.99  0.00602 ** 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 2.14 on 26 degrees of freedom
-## Multiple R-squared:  0.894,	Adjusted R-squared:  0.874 
-## F-statistic:   44 on 5 and 26 DF,  p-value: 7.18e-12
-```
-
-### Comparing models
-
-We got 2 models, second one combining variables describes Mpg the best.
-
-See fig 2 and 3 for visual explanation.
-
-```r
-anova(fit1, fit2)
-```
-
-```
-## Analysis of Variance Table
-## 
-## Model 1: mpg ~ am
-## Model 2: mpg ~ hp * wt + qsec + am
-##   Res.Df RSS Df Sum of Sq    F  Pr(>F)    
-## 1     30 721                              
-## 2     26 119  4       602 32.8 8.1e-10 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-P value is lower than 0.05 which means that model fit2 is significant improvement over model fit1
-
+---
 ## Appendix
 
 ### Figure 1
@@ -211,7 +155,7 @@ plot(m$am , m$mpg, main="MPG vs Transmission", xlab="Transmission", ylab="MPG", 
 abline(lm(mpg ~ am, m), col="red")
 ```
 
-![plot of chunk unnamed-chunk-6](assets/fig/unnamed-chunk-6.png) 
+![plot of chunk unnamed-chunk-4](assets/fig/unnamed-chunk-4.png) 
 
 ### Figure 2
 
@@ -220,14 +164,6 @@ layout(matrix(c(1,2,3,4),2,2))
 plot(fit1)
 ```
 
-![plot of chunk unnamed-chunk-7](assets/fig/unnamed-chunk-7.png) 
-
-### Figure 3
-
-```r
-layout(matrix(c(1,2,3,4),2,2))
-plot(fit2)
-```
-
-![plot of chunk unnamed-chunk-8](assets/fig/unnamed-chunk-8.png) 
+![plot of chunk unnamed-chunk-5](assets/fig/unnamed-chunk-5.png) 
+---
 

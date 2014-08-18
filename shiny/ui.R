@@ -64,13 +64,13 @@ shinyUI(
                       )
              ),
              tabPanel("SourceCode",
-                      p("part1_devdataprod-shiny"),
-                      a("https://github.com/mandelbrot/devdataprod-004/tree/master/shiny")
+                      p("devdataprod-shiny"),
+                      a("https://github.com/mandelbrot/coursera-devdataprod-004/tree/master/shiny")
              ),
              tabPanel("Special",
-                      a("http://mandelbrot.github.io/devdataprod-004/shiny/www/regmods.html"),
+                      a("https://github.com/mandelbrot/coursera-devdataprod-004/blob/master/shiny/www/regmods.html"),
                       hr(),
-                      tags$iframe(src="part0_regmods-mtcars.html", 
+                      tags$iframe(src="regmods.html", 
                                   width="100%", height=600, frameborder=0, 
                                   seamless=NA)
              )

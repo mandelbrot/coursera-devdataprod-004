@@ -1,8 +1,8 @@
 ---
-title       : 
+title       : mtcars dataset analysis
 subtitle    : 
-author      : 
-job         : 
+author      : mandelbrot
+job         : coursera-devdataprod
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
@@ -68,20 +68,58 @@ head(mtcars, 3)
 
 ## Analysis - main code
 
-```r
-  formulaTextPoint <- reactive({
-    paste("mpg ~", "as.integer(", input$variable, ")")  })
-  
-  fit <- reactive({
-    lm(as.formula(formulaTextPoint()), data=mpgData)  })
-  ...
-  output$fit <- renderPrint({
-    summary(fit()) })
-  
-  output$mpgPlot <- renderPlot({
-    with(mpgData, {
-      plot(as.formula(formulaTextPoint()))
-      abline(fit(), col=2)
-    })  })
+See the boxplot as fig 1 for visual explanation.
+```{r}
+fit1 <- lm(mpg~am, data=mtcars)
+summary(fit1)
+```
+
+### Finding the best model
+
+Let's fit a model with all explanatory variables. R-squared = 0.869
+```{r}
+fitAll<-lm(mpg~.,mtcars)
+summary(fitAll)
+```
+
+P values are high so we can use only those variables with low p values, for example p, wt, qsec and am. Actually, we got 0.8579 R-squared for model lm(mpg~hp+wt+qsec+am,mtcars) which is lower than fitAll model, but with a little experimenting, I got the following model with 0.8942 R-squared:
+```{r}
+fit2<-lm(mpg~hp*wt+qsec+am,mtcars)
+summary(fit2)
+```
+
+### Comparing models
+
+We got 2 models, second one combining variables describes Mpg the best.
+
+See fig 2 and 3 for visual explanation.
+```{r}
+anova(fit1, fit2)
 
 ```
+
+P value is lower than 0.05 which means that model fit2 is significant improvement over model fit1
+
+## Appendix
+
+### Figure 1
+```{r}
+m<-transform(mtcars, am=factor(am))
+levels(m$am)[1] <- "Automatic"
+levels(m$am)[2] <- "Manual"
+plot(m$am , m$mpg, main="MPG vs Transmission", xlab="Transmission", ylab="MPG", )
+abline(lm(mpg ~ am, m), col="red")
+```
+
+### Figure 2
+```{r}
+layout(matrix(c(1,2,3,4),2,2))
+plot(fit1)
+```
+
+### Figure 3
+```{r}
+layout(matrix(c(1,2,3,4),2,2))
+plot(fit2)
+```
+
